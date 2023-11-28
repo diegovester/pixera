@@ -5,7 +5,7 @@ import os
 from Login.login import login
 from Upload_Photo.photo_upload import photo_upload
 
-app = Flask(__name__, static_url_path="", static_folder="../cse3311_frontend/build")
+app = Flask(__name__, static_url_path="", static_folder="cse3311_frontend/build")
 app.register_blueprint(login)
 app.register_blueprint(photo_upload)
 CORS(app)
