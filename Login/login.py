@@ -44,7 +44,7 @@ date_collection = db['dates']
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="http://localhost:3000/callback"
+    redirect_uri="https://urchin-app-j4of9.ondigitalocean.app/callback"
 )
 
 # Store reset tokens and their corresponding email
