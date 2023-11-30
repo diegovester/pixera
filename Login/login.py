@@ -31,7 +31,7 @@ login = Blueprint("login", __name__)
 # Define your environment variables here
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
-client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
+
 JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 TOTP_SECRET = os.getenv("TOTP_SECRET")
 
@@ -61,6 +61,7 @@ config = {
 with open('client_secret.json', 'w') as json_file:
     json.dump(config, json_file, indent=2)
 
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
 
 mongo_client = MongoClient(os.getenv("MONGO_URL"))
 db = mongo_client['PixEraDB']
