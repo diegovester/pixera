@@ -29,6 +29,6 @@ def index_file(**kwarg):
 
 if __name__ == "__main__":
     app.secret_key = os.getenv("SECRET_KEY")
-    HOST = os.getenv("HOST")
-    PORT = os.getenv("PORT")
+    HOST = os.getenv('HOST', '0.0.0.0')
+    PORT = os.getenv('PORT', 3000)
     app.run(debug=True, host=HOST, port=PORT)

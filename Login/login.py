@@ -35,11 +35,40 @@ client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret
 JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 TOTP_SECRET = os.getenv("TOTP_SECRET")
 
+# Load environment variables
+client_id = os.environ.get('CLIENT_ID', 'defaultClientId')
+client_secret = os.environ.get('CLIENT_SECRET', 'defaultClientSecret')
+project_id = os.environ.get('PROJECT_ID', 'defaultProjectId')
+auth_uri = os.environ.get('AUTH_URI', 'defaultAuthUri')
+token_uri = os.environ.get('TOKEN_URI', 'defaultTokenUri')
+auth_provider_x509_cert_url = os.environ.get('AUTH_PROVIDER_CERT_URL', 'defaultCertUrl')
+redirect_uris = [os.environ.get('REDIRECT_URI', 'defaultRedirectUri')]
+
+# Create a dictionary with the environment variable values
+config = {
+    "web": {
+        "client_id": client_id,
+        "project_id": project_id,
+        "auth_uri": auth_uri,
+        "token_uri": token_uri,
+        "auth_provider_x509_cert_url": auth_provider_x509_cert_url,
+        "client_secret": client_secret,
+        "redirect_uris": redirect_uris,
+    }
+}
+
+# Write the dictionary to a JSON file
+with open('client_secret.json', 'w') as json_file:
+    json.dump(config, json_file, indent=2)
+
+
 mongo_client = MongoClient(os.getenv("MONGO_URL"))
 db = mongo_client['PixEraDB']
 users_collection = db['Users']
 mongo_collection = db['image_keys']
 date_collection = db['dates']
+
+
 
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
